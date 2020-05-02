@@ -4,7 +4,7 @@ defmodule ChineseRestaurantTest do
   doctest ChineseRestaurant
   @basic_test_list [[1, 2, 3], [4]]
   @discount_factor 5.0
-  @concentration_factor -5.0
+  @concentration_factor 0.5
 
   test "adds to non-empty structure" do
     new_blocks = add_element(20, @basic_test_list, factor_ops())

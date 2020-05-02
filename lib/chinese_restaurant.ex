@@ -21,9 +21,9 @@ defmodule ChineseRestaurant do
   def add_element(value, blocks, opts) do
     {block_sizes, count} = successive_partition_sizes(blocks)
 
-    target_block = :rand.uniform(count + 1) - 1
     strength = Map.get(opts, :strength, @concentration_factor)
     discount = Map.get(opts, :discount, @discount_factor)
+    target_block = :rand.uniform(count + 1) - 1
 
     if target_block == empty_table_threshold(Enum.count(blocks), strength, discount) do
       add_to_new_block(value, blocks)
@@ -31,6 +31,7 @@ defmodule ChineseRestaurant do
       target_index = Enum.find_index(block_sizes, fn block_size ->
         target_block <= occupied_table_threshold(count, block_size, strength, discount)
       end)
+      IO.inspect({:ok, target_index})
       List.replace_at(blocks, target_index, Enum.at(blocks, target_index) ++ [value])
     end
   end
